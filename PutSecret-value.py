@@ -32,4 +32,4 @@ if __name__ == "__main__":
     region_name = os.getenv('REGION_NAME', 'ap-northeast-1')
     new_secret_values = os.getenv('Secret_value')
 
-    put_secret(secret_name, new_secret_values)
+    put_secret(secret_name, new_secret_values, region_name)
