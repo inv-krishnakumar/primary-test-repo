@@ -26,7 +26,13 @@ def put_secret(secret_name, new_secret_values, region_name):
 
 if __name__ == "__main__":
     secret_name = os.getenv('SECRET_NAME')
-    region_name = os.getenv('REGION_NAME', 'ap-northeast-1')
-    new_secret_values = os.getenv('Secret_value')
+    region_name = os.getenv('REGION_NAME')
+
+    if secret_name=="test-secret-managed":
+        new_secret_values = os.getenv('SECRET_VALUE')
+
+    if secret_name=="test-secret-managed-2":
+        new_secret_values = os.getenv('TEST_SECRET_VALUE')
+
 
     put_secret(secret_name, new_secret_values, region_name)
