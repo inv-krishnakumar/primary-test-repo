@@ -30,4 +30,5 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: run python script
       run: |
+        env:Secret_value:${{ secrets.SECRET_VALUE }}
         python PutSecret-value.py
