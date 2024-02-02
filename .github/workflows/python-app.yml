@@ -27,5 +27,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: run python script
         env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.MINT_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.MINT_AWS_SECRET_ACCESS_KEY }}
           Secret_value: ${{ secrets.SECRET_VALUE }}
         run: python PutSecret-value.py
