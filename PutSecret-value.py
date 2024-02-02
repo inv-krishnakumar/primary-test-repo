@@ -11,13 +11,11 @@ def put_secret(secret_name, new_secret_values, region_name):
     client = boto3.client('secretsmanager', region_name=region_name)
 
     try:
-        # Convert the new secret values to a JSON string
-        new_secret_string = json.dumps(new_secret_values)
 
         # Create or update the secret
         response = client.put_secret_value(
             SecretId=secret_name,
-            SecretString=new_secret_string,
+            SecretString=new_secret_values,
             VersionStages=['AWSCURRENT']
         )
 
