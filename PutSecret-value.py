@@ -25,7 +25,7 @@ def put_secret(secret_name, new_secret_values, region_name):
         print(f"Error updating secret: {e}")
 
 if __name__ == "__main__":
-    secret_name = os.getenv('SECRET_NAME', 'test-secret-managed')
+    secret_name = os.getenv('SECRET_NAME')
     region_name = os.getenv('REGION_NAME', 'ap-northeast-1')
     new_secret_values = os.getenv('Secret_value')
 

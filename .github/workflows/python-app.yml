@@ -3,12 +3,20 @@
 
 name: Python application
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      SECRET_NAME:
+        description: 'Name of secret'
+        required: true
+        type: choice
+        options:
+        - test-secret-managed
+        - test_2
+        - test_3
+      REGION_NAME:
+        description: 'Region code'
+        default: 'ap-northeast-1'
+        required: true
 permissions:
   contents: read
 jobs:
@@ -27,6 +35,8 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: run python script
         env:
+          SECRET_NAME: ${{ inputs.SECRET_NAME }}
+          REGION_NAME: ${{ inputs.REGION_NAME }}
           AWS_ACCESS_KEY_ID: ${{ secrets.MINT_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.MINT_AWS_SECRET_ACCESS_KEY }}
           Secret_value: ${{ secrets.SECRET_VALUE }}
