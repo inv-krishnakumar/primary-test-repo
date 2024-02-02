@@ -30,9 +30,6 @@ if __name__ == "__main__":
     # Replace these variables with your actual values or set them in the .env file
     secret_name = os.getenv('SECRET_NAME', 'default_secret_name')
     region_name = os.getenv('REGION_NAME', 'us-east-1')
+    new_secret_values = os.getenv('Secret_value')
 
-    # Load new secret values from a JSON file as a dictionary
-    with open('secrets.json', 'r') as json_file:
-        new_secret_values = json.load(json_file)
-
-    put_secret(secret_name, new_secret_values, region_name)
+    put_secret(secret_name, new_secret_values)
