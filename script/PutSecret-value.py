@@ -31,15 +31,10 @@ if __name__ == "__main__":
     data={
         "test-secret-managed":os.getenv('SECRET_VALUE'),
         "test-secret-managed-2":os.getenv('TEST_SECRET_VALUE')
+        
     }
 
     new_secret_values=data.get(secret_name)
-
-    # if secret_name=="test-secret-managed":
-    #     new_secret_values = os.getenv('SECRET_VALUE')
-
-    # if secret_name=="test-secret-managed-2":
-    #     new_secret_values = os.getenv('TEST_SECRET_VALUE')
 
 
     put_secret(secret_name, new_secret_values, region_name)
