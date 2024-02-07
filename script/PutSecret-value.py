@@ -2,8 +2,9 @@ import os
 import json
 import boto3
 from botocore.exceptions import ClientError
+#from dotenv import load_dotenv
 
-load_dotenv()  # Load environment variables from .env file
+#load_dotenv()  # Load environment variables from .env file
 
 def put_secret(secret_name, new_secret_values, region_name):
     # Create the Secrets Manager client
