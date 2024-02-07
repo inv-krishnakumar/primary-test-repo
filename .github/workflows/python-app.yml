@@ -41,4 +41,4 @@ jobs:
           SECRET_VALUE: ${{ secrets.SECRET_VALUE }}
           TEST_SECRET_VALUE: ${{ secrets.TEST_SECRET_VALUE }}
 
-        run: python PutSecret-value.py
+        run: python script/PutSecret-value.py
