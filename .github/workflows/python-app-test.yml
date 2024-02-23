@@ -1,0 +1,67 @@
+
+name: MINT Python update AWS secret value workflow
+on:
+  workflow_dispatch:
+    inputs:
+      SECRET_NAME:
+        description: 'Name of secret'
+        required: true
+        type: choice
+        options:
+        - scrt-qi-back-dev-data_exchange
+        - scrt-qi-back-dev-monitor
+        - scrt-qi-back-dev-research
+        - scrt-qi-back-dev-screening
+        - scrt-qi-back-dev-batch
+        - scrt-qi-back-dev-video
+        - scrt-qi-back-dev-customer
+        - scrt-qi-back-dev-communication
+        - scrt-qi-bff-dev-textchat
+        - scrt-qi-bff-dev-customer
+      env_name:
+        description: 'Environment name'
+        required: true
+        type: choice
+        options:
+        - dev
+        - prod
+      REGION_NAME:
+        description: 'Region code'
+        default: 'ap-northeast-1'
+        required: true
+      
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: mm-arc-runner-set-${{ inputs.env_name }}
+    environment: ${{ inputs.env_name }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install boto3
+          if [ -f layer/56-sm/scripts/requirements.txt ]; then pip install -r layer/56-sm/scripts/requirements.txt; fi
+      - name: run python script
+        env:
+          SECRET_NAME: ${{ inputs.SECRET_NAME }}
+          REGION_NAME: ${{ inputs.REGION_NAME }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.MINT_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.MINT_AWS_SECRET_ACCESS_KEY }}
+          QI_DEV_DATA_EXCHANGE_SECRET_VALUE: ${{ secrets.QI_DEV_DATA_EXCHANGE_SECRET_VALUE }}
+          QI_DEV_MONITOR_SECRET_VALUE: ${{ secrets.QI_DEV_MONITOR_SECRET_VALUE }}
+          QI_DEV_RESEARCH_SECRET_VALUE: ${{ secrets.QI_DEV_RESEARCH_SECRET_VALUE }}
+          QI_DEV_SCREENING_SECRET_VALUE: ${{ secrets.QI_DEV_SCREENING_SECRET_VALUE }}
+          QI_DEV_BATCH_SECRET_VALUE: ${{ secrets.QI_DEV_BATCH_SECRET_VALUE }}
+          QI_DEV_VIDEO_SECRET_VALUE: ${{ secrets.QI_DEV_VIDEO_SECRET_VALUE }}
+          QI_DEV_CUSTOMER_SECRET_VALUE: ${{ secrets.QI_DEV_CUSTOMER_SECRET_VALUE }}
+          QI_DEV_COMMUNICATION_SECRET_VALUE: ${{ secrets.QI_DEV_COMMUNICATION_SECRET_VALUE }}
+          QI_DEV_TEXT_CHAT_SECRET_VALUE: ${{ secrets.QI_DEV_TEXT_CHAT_SECRET_VALUE }}
+          QI_DEV_BFF_CUSTOMER_SECRET_VALUE: ${{ secrets.QI_DEV_BFF_CUSTOMER_SECRET_VALUE }}
+
+        run: python layer/56-sm/scripts/PutSecret-value.py
