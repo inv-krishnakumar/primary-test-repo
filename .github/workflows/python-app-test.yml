@@ -34,7 +34,7 @@ permissions:
   contents: read
 jobs:
   build:
-    runs-on: mm-arc-runner-set-${{ inputs.env_name }}
+    runs-on: ubuntu-latest
     environment: ${{ inputs.env_name }}
     steps:
       - uses: actions/checkout@v3
