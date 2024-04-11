@@ -19,7 +19,7 @@ jobs:
         uses: joshlk/jenkins-githubaction@master
         with:
           url: http://13.115.247.127
-          job_name: jenkins_job_name
+          job_name: test
           username: ${{ secrets.JENKINS_USER }}
           api_token: ${{ secrets.JENKINS_TOKEN }}
           timeout: "1000"
