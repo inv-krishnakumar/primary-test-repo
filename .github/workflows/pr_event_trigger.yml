@@ -9,8 +9,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  if: github.event.pull_request.merged == true
   build:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       id-token: write
