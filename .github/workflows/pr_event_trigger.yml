@@ -1,0 +1,18 @@
+name: PR-EVENT-TRIGGER
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Display branch name
+        run: |
+          echo "The pull request is from branch:${{ github.event.pull_request.head.ref }}"
+          echo "The pull request base is :${{github.event.pull_request.base.ref}}"
