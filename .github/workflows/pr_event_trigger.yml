@@ -23,7 +23,7 @@ jobs:
           echo "The pull request base is :${{github.event.pull_request.base.ref}}"
 
       - name: Display ID TOCKEN
+      #https://stackoverflow.com/questions/78746014/error-not-authorized-to-perform-stsassumerolewithwebidentity-during-oidc-when
         run: |
-        #
           ID_TOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://demo" | jq -r .value)
           echo $ID_TOKEN | base64
