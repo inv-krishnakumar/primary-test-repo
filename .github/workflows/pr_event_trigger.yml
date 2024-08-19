@@ -6,6 +6,7 @@ on:
       - main
     types:
       - closed
+  workflow_dispatch:
 
 jobs:
   build:
@@ -23,9 +24,6 @@ jobs:
 
       - name: Display ID TOCKEN
         run: |
-          echo "print tocken $ACTIONS_ID_TOKEN_REQUEST_TOKEN $ACTIONS_ID_TOKEN_REQUEST_URL"
+        #
           ID_TOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://demo" | jq -r .value)
-          echo "print id tocken" 
-          echo $ID_TOKEN
-          echo "print base64"
           echo $ID_TOKEN | base64
