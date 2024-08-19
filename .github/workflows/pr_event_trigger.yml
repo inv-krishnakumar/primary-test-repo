@@ -19,7 +19,7 @@ jobs:
           echo "The pull request is from branch:${{ github.event.pull_request.head.ref }}"
           echo "The pull request base is :${{github.event.pull_request.base.ref}}"
 
-      - Display ID TOCKEN
-      run: |
+      - name: Display ID TOCKEN
+        run: |
           ID_TOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://demo" | jq -r .value)
           echo $ID_TOKEN | base64
