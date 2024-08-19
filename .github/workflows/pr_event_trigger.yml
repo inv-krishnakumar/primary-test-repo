@@ -9,6 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
+  if: github.event.pull_request.merged == true
   build:
     runs-on: ubuntu-latest
     permissions:
