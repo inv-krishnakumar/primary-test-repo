@@ -23,4 +23,4 @@ jobs:
         run: echo "IMAGE_TAG=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
       - name: 04.print  IMAGE_TAG_VALUE
-        run: echo $(IMAGE_TAG)
+        run: echo ${{ env.IMAGE_TAG }}
