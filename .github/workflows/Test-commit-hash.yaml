@@ -1,0 +1,28 @@
+name: Test-commit-hash
+on:
+  workflow_dispatch:
+    inputs:
+      branch_name:
+        description: 'Input Checkout Branch Name'
+        required: true
+        default: 'main'
+
+env:
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: 01.checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch_name }} 
+
+      - name: 03.set IMAGE_TAG value
+        run: echo "IMAGE_TAG=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: 04.print  IMAGE_TAG_VALUE
+        run: echo $(IMAGE_TAG)
