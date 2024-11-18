@@ -7,8 +7,6 @@ on:
         required: true
         default: 'main'
 
-env:
-
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
