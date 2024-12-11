@@ -29,6 +29,9 @@ on:
         description: 'Region code'
         default: 'ap-northeast-1'
         required: true
+      Version_tag:
+        description: 'version tag'
+        required: true
       
 permissions:
   contents: read
@@ -63,5 +66,6 @@ jobs:
           QI_DEV_COMMUNICATION_SECRET_VALUE: ${{ secrets.QI_DEV_COMMUNICATION_SECRET_VALUE }}
           QI_DEV_TEXT_CHAT_SECRET_VALUE: ${{ secrets.QI_DEV_TEXT_CHAT_SECRET_VALUE }}
           QI_DEV_BFF_CUSTOMER_SECRET_VALUE: ${{ secrets.QI_DEV_BFF_CUSTOMER_SECRET_VALUE }}
+          tag: "${{ inputs.SECRET_NAME}}-$(git rev-parse --short HEAD)}}"
 
         run: python layer/56-sm/scripts/PutSecret-value.py
