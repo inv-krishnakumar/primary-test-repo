@@ -27,5 +27,6 @@ jobs:
 
       - name: 04.print  IMAGE_TAG_VALUE
         run: echo ${{ env.IMAGE_TAG }}
+
       - name: 05.print version tag + commit hash
-        run : echo "${{ inputs.SECRET_NAME}}-$(git rev-parse --short HEAD)}}"
+        run : echo "${{ env.IMAGE_TAG }}-$(git rev-parse --short HEAD)}}"
