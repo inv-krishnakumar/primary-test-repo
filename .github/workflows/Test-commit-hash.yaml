@@ -6,6 +6,9 @@ on:
         description: 'Input Checkout Branch Name'
         required: true
         default: 'main'
+      Version_tag:
+        description: 'version tag'
+        required: true
 
 jobs:
   build_and_push:
@@ -24,3 +27,5 @@ jobs:
 
       - name: 04.print  IMAGE_TAG_VALUE
         run: echo ${{ env.IMAGE_TAG }}
+      - name: 05.print version tag + commit hash
+        run : echo "${{ inputs.SECRET_NAME}}-$(git rev-parse --short HEAD)}}"
