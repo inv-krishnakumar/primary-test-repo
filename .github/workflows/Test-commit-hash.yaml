@@ -26,4 +26,4 @@ jobs:
         run : |
             echo "IMAGE_TAG=${{ github.event.inputs.version_tag }}-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
             echo "test"
-            echo ${{env.IMAGE_TAG}}
+            echo ${IMAGE_TAG}
