@@ -5,7 +5,7 @@
 
         }
         stages{
-            stage("check if variable is provided") {
+            stage("check if version tag is provided") {
                 steps{
                     checkout scm
                     script {
