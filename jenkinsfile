@@ -1,0 +1,37 @@
+    pipeline {
+        agent any
+        environment {
+        FCM_KEY = "fcm-sdk-prod.json"
+
+        }
+        stages{
+            stage("check if variable is provided") {
+                steps{
+                    checkout scm
+                    script {
+                        if (!params.version_tag) {
+                            error("Build failed because the version tag is not provided")
+                        } else {
+                        // Fetch the short Git commit hash
+                        GIT_COMMIT_HASH = sh(
+                            script: 'git rev-parse --short HEAD',
+                            returnStdout: true
+                        ).trim()
+                        // Combine version number and commit hash
+                        IMAGE_TAG = "${params.version_tag}-${GIT_COMMIT_HASH}"
+                        echo "image tag: ${IMAGE_TAG}"
+                }
+                }
+                }
+            }
+
+            stage("Copy Secret File") {
+                steps{
+                withCredentials([file(credentialsId: "${FCM_KEY}", variable: 'FCM_KEY_PROD')]) {
+                        sh "cp ${FCM_KEY_PROD} 	fcm-sdk.json"
+                    }
+                }
+            }
+        }
+    }
+
