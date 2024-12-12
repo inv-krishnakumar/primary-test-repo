@@ -29,4 +29,4 @@ jobs:
         run: echo ${{ env.IMAGE_TAG }}
 
       - name: 05.print version tag + commit hash
-        run : echo "${{ github.inputs.Version_tag }}-$(git rev-parse --short HEAD)"
+        run : echo "${{ github.event.inputs.Version_tag }}-$(git rev-parse --short HEAD)"
