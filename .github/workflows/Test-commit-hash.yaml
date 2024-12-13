@@ -29,5 +29,5 @@ jobs:
       - name: 03. pull and tag an image
         run : |
             docker pull ubuntu
-            docker tag ubuntu:latest ubuntu:${IMAGE_TAG}
+            docker tag ubuntu:latest test:${IMAGE_TAG}
             docker images
