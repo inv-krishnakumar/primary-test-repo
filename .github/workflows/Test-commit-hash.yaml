@@ -30,4 +30,4 @@ jobs:
         run : |
             docker pull ubuntu
             docker tag ubuntu:latest ubuntu:${IMAGE_TAG}
-            docker ps
+            docker images
