@@ -23,11 +23,13 @@ jobs:
           ref: ${{ github.event.inputs.branch_name }} 
 
       - name: 02.print version tag + commit hash
-        run : |
-            IMAGE_TAG="${{ github.event.inputs.version_tag }}-$(git rev-parse --short HEAD)"
+        run: |
+            # Remove whitespaces from version_tag
+            CLEANED_VERSION_TAG=$(echo "${{ github.event.inputs.version_tag }}" | tr -d '[:space:]')
+            IMAGE_TAG=${CLEANED_VERSION_TAG}-$(git rev-parse --short HEAD)
             echo "IMAGE_TAG=${IMAGE_TAG}" >> $GITHUB_ENV
-      - name: 03. pull and tag an image
-        run : |
+      - name: 03.pull and tag an image
+        run: |
             docker pull ubuntu
             docker tag ubuntu:latest test:${IMAGE_TAG}
             docker images
