@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-hello-world-deployment
+  labels:
+    app: node-hello-world
+spec:
+  replicas: 3  # Number of pod replicas
+  selector:
+    matchLabels:
+      app: node-hello-world
+  template:
+    metadata:
+      labels:
+        app: node-hello-world
+    spec:
+      containers:
+      - name: node-hello-world
+        image: 10.10.1.9:5000/node-hello-world  # Replace with your Docker image
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+
