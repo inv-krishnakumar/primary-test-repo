@@ -1,0 +1,17 @@
+name: Write Secret to File
+
+on: [workflow_dispatch]
+
+env:
+  AWS_REGION: "ap-northeast-1"
+  AWS_ROLE_TO_ASSUME: "arn:aws:iam::533267243551:role/test-github-provider"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 02.configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ env.AWS_ROLE_TO_ASSUME }} 
