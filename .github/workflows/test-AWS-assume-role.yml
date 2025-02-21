@@ -1,4 +1,4 @@
-name: Write Secret to File
+name: Test AWS Assume Role
 
 on: [workflow_dispatch]
 
