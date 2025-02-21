@@ -8,7 +8,11 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    environment: staging
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
     steps:
       - name: 02.configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
