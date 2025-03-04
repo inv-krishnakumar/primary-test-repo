@@ -27,8 +27,8 @@ jobs:
           echo "The pull request base is :${{github.event.pull_request.base.ref}}"
           echo "$(git rev-parse --short HEAD)"
           VERSION_TAG=$(git describe --tags --abbrev=0)
-            IMAGE_TAG=${VERSION_TAG}-$(git rev-parse --short HEAD)
-            echo "IMAGE_TAG=${IMAGE_TAG}"
+          IMAGE_TAG=${VERSION_TAG}-$(git rev-parse --short HEAD)
+          echo "IMAGE_TAG=${IMAGE_TAG}"
 
       - name: Display ID TOCKEN
       #https://stackoverflow.com/questions/78746014/error-not-authorized-to-perform-stsassumerolewithwebidentity-during-oidc-when
