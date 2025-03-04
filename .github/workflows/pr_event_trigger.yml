@@ -18,8 +18,9 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-        with:
-          fetch-tags: true
+      
+      - name: Fetch latest tag
+        run: git fetch --tags --force
 
       - name: Display branch name
         run: |
