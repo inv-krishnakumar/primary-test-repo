@@ -18,16 +18,17 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-      
-      - name: Fetch latest tag
-        run: git fetch --tags --force
+        with:
+          fetch-depth: 0
 
       - name: Display branch name
         run: |
           echo "The pull request is from branch:${{ github.event.pull_request.head.ref }}"
           echo "The pull request base is :${{github.event.pull_request.base.ref}}"
           echo "$(git rev-parse --short HEAD)"
-          echo "$(git describe --tags --abbrev=0)"
+          VERSION_TAG=$(git describe --tags --abbrev=0)
+          IMAGE_TAG=${VERSION_TAG}-$(git rev-parse --short HEAD)
+          echo "IMAGE_TAG=${IMAGE_TAG}"
 
       - name: Display ID TOCKEN
       #https://stackoverflow.com/questions/78746014/error-not-authorized-to-perform-stsassumerolewithwebidentity-during-oidc-when
