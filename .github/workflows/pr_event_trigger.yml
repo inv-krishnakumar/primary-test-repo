@@ -23,6 +23,8 @@ jobs:
         run: |
           echo "The pull request is from branch:${{ github.event.pull_request.head.ref }}"
           echo "The pull request base is :${{github.event.pull_request.base.ref}}"
+          echo "$(git rev-parse --short HEAD)"
+          echo "$(git describe --tags --abbrev=0)"
 
       - name: Display ID TOCKEN
       #https://stackoverflow.com/questions/78746014/error-not-authorized-to-perform-stsassumerolewithwebidentity-during-oidc-when
