@@ -10,9 +10,8 @@ on:
 
 jobs:
   build:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    environment: staging
+    environment: production
     permissions:
       id-token: write
     steps:
